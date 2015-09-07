@@ -38,6 +38,12 @@
     </div>
     
 <script id= "supost-bookmarklet" type="text/bookmarklet">
+  if(!(window.location+"").match("www.supost.com\/")){
+    var l="http://www.supost.com/";
+    alert("This only work at "+l+". Teleporting you there...");
+    window.location=l;
+  }
+
   var style = document.createElement("style");
   style.type = "text/css";
   style.innerHTML = ".one-result{padding:20px 0;border-bottom:1px solid #ccc;}";
@@ -54,7 +60,7 @@
 <script type="text/javascript">
   //The following code get the job done and let us write the bookmarklet in a script tag. 
   function createBookmarklet(code){
-        //CAREFUL how you write your code! This is going to convert newlines to spaces (use semicolumns!) and even remove multiple spaces from strings!
+        //CAREFUL how you write your code! This is going to convert newlines to spaces (use semicolons!) and even remove multiple spaces from strings!
         code = code.replace(/\s\s+/g, ' ');  
         //IIFE
         code = '(function(){' + code + '})()';
