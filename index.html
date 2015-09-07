@@ -37,7 +37,7 @@
 <h2>
 <a id="supost-images---add-images-on-the-main-page" class="anchor" href="#supost-images---add-images-on-the-main-page" aria-hidden="true"><span class="octicon octicon-link"></span></a>SUPost Images - Add images on the main page</h2>
 
-<p>This is the bookmarket</p>
+<p><a id="supost-atag" href="#">SUPost Images</a></p>
         </section>
 
         <footer>
@@ -48,5 +48,39 @@
         
       </div>
     </div>
+    
+<script id= "supost-bookmarklet" type="text/bookmarklet">
+  var style = document.createElement("style");
+  style.type = "text/css";
+  style.innerHTML = ".one-result{padding:20px 0;border-bottom:1px solid #ccc;}";
+  document.getElementsByTagName("head")[0].appendChild(style);
+
+  Array.prototype.forEach.call(document.querySelectorAll(".one-result a"),function(el){
+    var id=el.getAttribute("href").split("/").pop();
+    var div=document.createElement('div');
+    div.innerHTML="<div><img src='/uploads/post/"+id+"a' /><img src='/uploads/post/"+id+"b' /><img src='/uploads/post/"+id+"c' /><img src='/uploads/post/"+id+"d' /></div>";
+    el.parentNode.insertBefore(div, el);
+  });
+</script>
+
+<script type="text/javascript">
+  //The following code get the job done and let us write the bookmarklet in a script tag. 
+  function createBookmarklet(code){
+        //CAREFUL how you write your code! This is going to convert newlines to spaces (use semicolumns!) and even remove multiple spaces from strings!
+        code = code.replace(/\s\s+/g, ' ');  
+        //IIFE
+        code = '(function(){' + code + '})()';
+        //Make the browser happy
+        return 'javascript:' + encodeURIComponent(code);
+  }
+
+  var bookmarklets = ["supost"];
+  
+  bookmarklets.forEach(function(el){
+    document.getElementById(el+"-atag").setAttribute("href", 
+      createBookmarklet(document.getElementById(el+"-bookmarklet").innerHTML)
+    );
+  });
+</script>
   </body>
 </html>
